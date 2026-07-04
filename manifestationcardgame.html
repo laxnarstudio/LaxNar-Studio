@@ -232,7 +232,7 @@ nav.scrolled{background:rgba(255,255,255,0.75);}
       <span>🌸</span> Draw Your Card
     </button>
     <button class="again-btn" id="againBtn" onclick="resetCard()">
-      Draw Again ✨
+      Draw Again 
     </button>
   </div>
 
@@ -240,7 +240,7 @@ nav.scrolled{background:rgba(255,255,255,0.75);}
   <div class="share-box" id="shareBox">
     <div class="share-title">Share your card for today 🌸</div>
     <div class="share-text" id="shareText">Your message will appear here</div>
-    <button class="copy-btn" onclick="copyCard()">Copy Message ✨</button>
+    <button class="copy-btn" onclick="copyCard()">Copy Message </button>
     <div class="copied-msg" id="copiedMsg">Copied to clipboard 🌸</div>
   </div>
 
@@ -288,7 +288,7 @@ function drawCard() {
   document.getElementById('cardCategory').textContent = card.category;
   document.getElementById('cardMessage').textContent = card.message;
   document.getElementById('cardAffirmation').textContent = '"' + card.affirmation + '"';
-  document.getElementById('shareText').textContent = card.emoji + ' ' + card.message + '\n\n"' + card.affirmation + '"\n\n— LaxNara Wini';
+  document.getElementById('shareText').textContent = card.emoji + ' ' + card.message + '\n\n"' + card.affirmation + '"';
 
   setTimeout(() => {
     document.getElementById('manifestCard').classList.add('flipped');
@@ -315,7 +315,7 @@ function resetCard() {
 
 function copyCard() {
   if (!currentCard) return;
-  const text = currentCard.emoji + ' ' + currentCard.message + '\n\n"' + currentCard.affirmation + '"\n\n— LaxNara Wini\nlaxnarawini.github.io';
+  const text = currentCard.emoji + ' ' + currentCard.message + '\n\n"' + currentCard.affirmation  '"';
   navigator.clipboard.writeText(text).then(() => {
     const msg = document.getElementById('copiedMsg');
     msg.classList.add('show');
