@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Manifestation Card — LaxNara Wini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+:root{
+  --pink:#F1AFC6;
+  --pink-dark:#D47A9C;
+  --pink-light:#FFE7F1;
+  --text:#66535D;
+}
+.cursor{position:fixed;width:12px;height:12px;background:var(--pink-dark);border-radius:50%;pointer-events:none;z-index:99999;transition:transform 0.1s ease;mix-blend-mode:multiply;}
+.cursor-glow{position:fixed;width:40px;height:40px;border:1.5px solid rgba(212,122,156,0.4);border-radius:50%;pointer-events:none;z-index:99998;transition:all 0.15s ease;}
+.cursor-particle{position:fixed;border-radius:50%;pointer-events:none;z-index:99997;opacity:0;animation:particleFade 0.6s ease forwards;}
+@keyframes particleFade{0%{opacity:0.8;transform:scale(1);}100%{opacity:0;transform:scale(0);}}
+body{font-family:"Poppins",sans-serif;background:linear-gradient(180deg,#FFF9FC,#FFF5F8,#FFF9FC);color:var(--text);overflow-x:hidden;cursor:none;min-height:100vh;}
+.background{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-100;overflow:hidden;}
+.blob{position:absolute;border-radius:50%;filter:blur(140px);opacity:.4;animation:floatBlob 18s ease-in-out infinite alternate;}
+.blob1{width:450px;height:450px;background:#FFD5E5;top:-150px;left:-150px;}
+.blob2{width:420px;height:420px;background:#FFE7F2;top:20%;right:-120px;animation-duration:14s;}
+.blob3{width:350px;height:350px;background:#FFD9EA;bottom:-120px;left:20%;animation-duration:12s;}
+.blob4{width:300px;height:300px;background:#FFF0F6;bottom:50px;right:10%;animation-duration:16s;}
+@keyframes floatBlob{0%{transform:translateY(0) scale(1);}100%{transform:translateY(-40px) scale(1.08);}}
+.sparkles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.sparkle{position:absolute;width:3px;height:3px;background:rgba(241,175,198,0.7);border-radius:50%;animation:twinkle 3s ease-in-out infinite;}
+@keyframes twinkle{0%,100%{opacity:0.1;transform:scale(0.5);}50%{opacity:1;transform:scale(1.5);}}
+.cherry-canvas{position:fixed;inset:0;pointer-events:none;z-index:1;}
+.moon{position:fixed;top:80px;right:80px;width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#FFFDFE,#FFF0F8);box-shadow:0 0 30px rgba(255,255,255,0.9),0 0 70px rgba(255,210,235,0.6),0 0 130px rgba(255,210,235,0.3);animation:moonGlow 5s ease-in-out infinite alternate;z-index:2;pointer-events:none;}
+@keyframes moonGlow{from{transform:scale(1);}to{transform:scale(1.05);}}
+
+/* NAV */
+nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);width:92%;max-width:1200px;padding:16px 32px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.55);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.7);border-radius:100px;box-shadow:0 15px 40px rgba(255,190,210,0.18);z-index:999;transition:all 0.4s ease;}
+nav.scrolled{background:rgba(255,255,255,0.75);}
+.nav-logo{font-family:"Cormorant Garamond",serif;font-size:28px;color:var(--pink-dark);font-weight:600;text-decoration:none;}
+.nav-back{text-decoration:none;padding:10px 22px;border-radius:999px;background:linear-gradient(135deg,#F8C7D9,#F1AFC6);color:white;font-weight:600;font-size:13px;transition:0.4s;box-shadow:0 10px 25px rgba(241,175,198,0.3);}
+.nav-back:hover{transform:translateY(-3px);}
+
+/* MAIN WRAPPER */
+.wrapper{max-width:700px;margin:0 auto;padding:140px 25px 80px;position:relative;z-index:5;text-align:center;}
+
+/* HEADER */
+.page-badge{display:inline-block;padding:8px 20px;border-radius:999px;background:rgba(255,255,255,0.65);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.8);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--pink-dark);margin-bottom:24px;}
+.page-title{font-family:"Cormorant Garamond",serif;font-size:58px;font-weight:600;color:#C87496;line-height:1.1;margin-bottom:16px;}
+.page-sub{font-size:16px;line-height:1.9;color:#6a5a60;max-width:520px;margin:0 auto 50px;}
+
+/* CARD AREA */
+.card-area{margin:0 auto 40px;perspective:1000px;}
+
+/* THE CARD */
+.manifest-card{
+  width:100%;max-width:480px;height:320px;
+  margin:0 auto;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform 0.8s cubic-bezier(0.4,0.2,0.2,1);
+  cursor:pointer;
+}
+.manifest-card.flipped{transform:rotateY(180deg);}
+
+.card-face{
+  position:absolute;inset:0;
+  border-radius:28px;
+  backface-visibility:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:36px;
+}
+
+/* CARD BACK (shown first) */
+.card-back{
+  background:linear-gradient(135deg,rgba(255,255,255,0.7),rgba(255,240,248,0.8));
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.85);
+  box-shadow:0 25px 60px rgba(255,185,210,0.2),0 10px 25px rgba(255,255,255,0.5);
+}
+.card-back-symbol{font-size:64px;margin-bottom:16px;animation:floatSymbol 4s ease-in-out infinite;}
+@keyframes floatSymbol{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.card-back-text{font-family:"Cormorant Garamond",serif;font-size:24px;color:var(--pink-dark);font-style:italic;}
+.card-back-hint{font-size:13px;color:#9D7A88;margin-top:10px;opacity:0.8;}
+
+/* CARD FRONT (revealed after flip) */
+.card-front{
+  background:linear-gradient(135deg,#FFF0F7,#FFE4F0,#FFF8FC);
+  border:1px solid rgba(255,200,220,0.5);
+  box-shadow:0 25px 60px rgba(255,185,210,0.25);
+  transform:rotateY(180deg);
+  flex-direction:column;
+  gap:16px;
+}
+.card-emoji{font-size:36px;}
+.card-category{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--pink-dark);opacity:0.7;}
+.card-message{font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:500;color:#B86C8A;line-height:1.5;text-align:center;}
+.card-affirmation{font-size:13px;font-style:italic;color:#9D7A88;line-height:1.7;text-align:center;padding:12px 16px;background:rgba(255,255,255,0.6);border-radius:12px;border-left:2px solid #F1AFC6;}
+
+/* DRAW BUTTON */
+.draw-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:18px 44px;border-radius:999px;
+  background:linear-gradient(135deg,#F8C7D9,#F1AFC6,#E8A0BE);
+  color:white;font-weight:600;font-size:15px;
+  border:none;cursor:pointer;
+  transition:0.4s cubic-bezier(0.2,0.8,0.2,1);
+  box-shadow:0 18px 45px rgba(241,175,198,0.4);
+  font-family:"Poppins",sans-serif;
+  margin-bottom:20px;
+}
+.draw-btn:hover{transform:translateY(-5px) scale(1.03);box-shadow:0 28px 60px rgba(241,175,198,0.5);}
+.draw-btn:active{transform:translateY(-2px);}
+.draw-btn span{font-size:20px;}
+
+/* AGAIN BUTTON */
+.again-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;border-radius:999px;
+  background:rgba(255,255,255,0.65);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.8);
+  color:var(--pink-dark);font-weight:600;font-size:14px;
+  cursor:pointer;transition:0.4s;
+  box-shadow:0 10px 28px rgba(255,185,210,0.15);
+  font-family:"Poppins",sans-serif;
+  opacity:0;pointer-events:none;
+  margin-left:12px;
+}
+.again-btn.visible{opacity:1;pointer-events:all;}
+.again-btn:hover{background:#F8C7D9;color:white;transform:translateY(-3px);}
+
+/* SHARE BOX */
+.share-box{
+  margin-top:30px;
+  padding:28px 32px;
+  background:rgba(255,255,255,0.58);backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.8);border-radius:24px;
+  box-shadow:0 15px 40px rgba(255,185,210,0.12);
+  opacity:0;transform:translateY(20px);
+  transition:all 0.6s ease;
+}
+.share-box.visible{opacity:1;transform:translateY(0);}
+.share-title{font-family:"Cormorant Garamond",serif;font-size:22px;color:#C87496;margin-bottom:10px;}
+.share-text{font-size:14px;color:#6a5a60;line-height:1.8;margin-bottom:18px;}
+.copy-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border-radius:999px;
+  background:linear-gradient(135deg,#F8C7D9,#F1AFC6);
+  color:white;font-weight:600;font-size:13px;
+  border:none;cursor:pointer;transition:0.3s;
+  font-family:"Poppins",sans-serif;
+}
+.copy-btn:hover{transform:translateY(-2px);}
+.copied-msg{font-size:13px;color:var(--pink-dark);margin-top:10px;opacity:0;transition:0.3s;}
+.copied-msg.show{opacity:1;}
+
+/* DIVIDER */
+.divider{display:flex;align-items:center;gap:16px;margin:50px 0 30px;}
+.divider-line{flex:1;height:1px;background:linear-gradient(to right,transparent,#E8B5C9,transparent);}
+.divider-flower{font-size:18px;color:var(--pink-dark);}
+
+/* BACK BUTTON */
+.back-wrap{text-align:center;margin-top:20px;}
+.back-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:999px;background:rgba(255,255,255,0.65);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.8);color:var(--pink-dark);text-decoration:none;font-weight:600;font-size:14px;transition:0.4s;box-shadow:0 12px 30px rgba(255,185,210,0.15);}
+.back-btn:hover{background:#F8C7D9;color:white;transform:translateY(-3px);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(25px);transition:all 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-track{background:#FFF5F8;}
+::-webkit-scrollbar-thumb{background:#E8AFC5;border-radius:20px;}
+::selection{background:#F7C8DA;color:white;}
+
+@media(max-width:768px){
+  .page-title{font-size:40px;}
+  .manifest-card{height:280px;}
+  .card-message{font-size:19px;}
+  .moon{width:50px;height:50px;top:90px;right:15px;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="background"><div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div><div class="blob blob4"></div></div>
+<div class="sparkles" id="sparkles"></div>
+<canvas class="cherry-canvas" id="cherryCanvas"></canvas>
+<div class="moon"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">LaxNara Wini</a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<div class="wrapper">
+
+  <div class="reveal">
+    <div class="page-badge">✨ Daily Practice</div>
+    <h1 class="page-title">Your Daily Manifestation Card</h1>
+    <p class="page-sub">Pull a card every morning and let the universe send you exactly the message you need to hear today. Each card carries a unique affirmation and intention to guide your day. 🌸</p>
+  </div>
+
+  <!-- Card -->
+  <div class="card-area reveal">
+    <div class="manifest-card" id="manifestCard">
+
+      <!-- Back of card (shown first) -->
+      <div class="card-face card-back">
+        <div class="card-back-symbol">🌸</div>
+        <div class="card-back-text">Your card is waiting</div>
+        <div class="card-back-hint">Draw when you are ready</div>
+      </div>
+
+      <!-- Front of card (revealed on flip) -->
+      <div class="card-face card-front" id="cardFront">
+        <div class="card-emoji" id="cardEmoji">✨</div>
+        <div class="card-category" id="cardCategory">Abundance</div>
+        <div class="card-message" id="cardMessage">Your message will appear here</div>
+        <div class="card-affirmation" id="cardAffirmation">Your affirmation will appear here</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="reveal" style="margin-bottom:10px;">
+    <button class="draw-btn" id="drawBtn" onclick="drawCard()">
+      <span>🌸</span> Draw Your Card
+    </button>
+    <button class="again-btn" id="againBtn" onclick="resetCard()">
+      Draw Again ✨
+    </button>
+  </div>
+
+  <!-- Share Box -->
+  <div class="share-box" id="shareBox">
+    <div class="share-title">Share your card for today 🌸</div>
+    <div class="share-text" id="shareText">Your message will appear here</div>
+    <button class="copy-btn" onclick="copyCard()">Copy Message ✨</button>
+    <div class="copied-msg" id="copiedMsg">Copied to clipboard 🌸</div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-flower">✿</div><div class="divider-line"></div></div>
+
+  <div class="back-wrap">
+    <a href="index.html" class="back-btn">← Return to Homepage</a>
+  </div>
+
+</div>
+
+<script>
+// ===== CARDS DATA =====
+const cards = [
+  {emoji:"✨",category:"Abundance",message:"You are a magnet for miracles and money flows to you with ease.",affirmation:"I am open to receiving abundance in all its beautiful forms today and every day."},
+  {emoji:"🌸",category:"Self Love",message:"You are worthy of every good thing without having to earn it first.",affirmation:"I love and accept myself completely exactly as I am right now in this moment."},
+  {emoji:"🌙",category:"Trust",message:"The universe has never once forgotten about you or your dreams.",affirmation:"I trust the timing of my life and I know that everything is unfolding perfectly for me."},
+  {emoji:"💜",category:"Healing",message:"You are allowed to rest without guilt and to heal without rushing.",affirmation:"I give myself full permission to heal at my own pace and with total compassion."},
+  {emoji:"🦋",category:"Growth",message:"Every ending in your life is making space for something more aligned to arrive.",affirmation:"I welcome change with an open heart knowing it is always leading me somewhere better."},
+  {emoji:"🌷",category:"Manifestation",message:"What you have been asking for is closer than it has ever been before.",affirmation:"My desires are valid and they are already making their way into my reality right now."},
+  {emoji:"☁️",category:"Peace",message:"You do not have to carry all of this alone. Let some of it go today.",affirmation:"I release what I cannot control and I choose peace over worry in this moment."},
+  {emoji:"💫",category:"Confidence",message:"You are more capable than you give yourself credit for. Trust yourself.",affirmation:"I believe in my own abilities and I trust myself to handle whatever comes my way."},
+  {emoji:"🌺",category:"Gratitude",message:"Everything you already have is something someone else is still praying for.",affirmation:"I am deeply grateful for all the goodness that already exists in my life right now."},
+  {emoji:"⭐",category:"Purpose",message:"Your presence in this world matters more than you will ever fully know.",affirmation:"I am exactly where I need to be and I am walking the path that is meant for me."},
+  {emoji:"🌿",category:"Alignment",message:"When you align with who you truly are everything begins to flow naturally.",affirmation:"I am aligned with my highest self and I move through my day with ease and intention."},
+  {emoji:"💎",category:"Wealth",message:"Financial abundance is not just for certain people. It is available to you too.",affirmation:"I am worthy of financial freedom and I welcome prosperity into every area of my life."},
+  {emoji:"🕊️",category:"Release",message:"Whatever is heavy in your heart today, you are allowed to put it down.",affirmation:"I release all that no longer serves my highest good with love and without looking back."},
+  {emoji:"🌸",category:"New Beginnings",message:"Today is a fresh start and you get to decide who you are becoming.",affirmation:"I step into this day with a renewed sense of possibility and faith in what is coming."},
+  {emoji:"💗",category:"Love",message:"You deserve the kind of love you so freely give to everyone around you.",affirmation:"I am deeply loved and I attract relationships that reflect my own worth and goodness."},
+  {emoji:"🔮",category:"Intuition",message:"Your inner voice is wise. Be still enough today to actually hear it.",affirmation:"I trust my intuition and I follow its guidance with confidence and without hesitation."},
+  {emoji:"🌙",category:"Rest",message:"Rest is not a reward you earn. It is something your body and soul genuinely need.",affirmation:"I honor my need for rest and I recharge without guilt knowing it makes me stronger."},
+  {emoji:"✨",category:"Courage",message:"The version of you who has everything you desire was brave enough to begin.",affirmation:"I take aligned steps toward my dreams today even when it feels scary or uncertain."},
+  {emoji:"🌺",category:"Abundance",message:"There is more than enough goodness in this world and it is flowing toward you.",affirmation:"I live in an abundant universe that always provides for me in expected and unexpected ways."},
+  {emoji:"💜",category:"Worthiness",message:"You do not have to prove yourself to deserve a beautiful life. You already do.",affirmation:"I am worthy of every dream I carry in my heart simply because I exist and I desire it."},
+];
+
+let currentCard = null;
+let isFlipped = false;
+
+function drawCard() {
+  const card = cards[Math.floor(Math.random() * cards.length)];
+  currentCard = card;
+
+  document.getElementById('cardEmoji').textContent = card.emoji;
+  document.getElementById('cardCategory').textContent = card.category;
+  document.getElementById('cardMessage').textContent = card.message;
+  document.getElementById('cardAffirmation').textContent = '"' + card.affirmation + '"';
+  document.getElementById('shareText').textContent = card.emoji + ' ' + card.message + '\n\n"' + card.affirmation + '"\n\n— LaxNara Wini 💜';
+
+  setTimeout(() => {
+    document.getElementById('manifestCard').classList.add('flipped');
+    isFlipped = true;
+    document.getElementById('drawBtn').style.display = 'none';
+    document.getElementById('againBtn').classList.add('visible');
+    document.getElementById('shareBox').classList.add('visible');
+  }, 100);
+
+  spawnCardParticles();
+}
+
+function resetCard() {
+  document.getElementById('manifestCard').classList.remove('flipped');
+  isFlipped = false;
+  document.getElementById('shareBox').classList.remove('visible');
+  document.getElementById('copiedMsg').classList.remove('show');
+
+  setTimeout(() => {
+    document.getElementById('drawBtn').style.display = 'inline-flex';
+    document.getElementById('againBtn').classList.remove('visible');
+  }, 400);
+}
+
+function copyCard() {
+  if (!currentCard) return;
+  const text = currentCard.emoji + ' ' + currentCard.message + '\n\n"' + currentCard.affirmation + '"\n\n— LaxNara Wini 💜\nlaxnarawini.github.io';
+  navigator.clipboard.writeText(text).then(() => {
+    const msg = document.getElementById('copiedMsg');
+    msg.classList.add('show');
+    setTimeout(() => msg.classList.remove('show'), 2500);
+  });
+}
+
+function spawnCardParticles() {
+  const card = document.getElementById('manifestCard');
+  const rect = card.getBoundingClientRect();
+  const colors = ['#F8C7D9','#F1AFC6','#E09AB7','#D47A9C','#FFE7F1','#FFF0F8'];
+  for (let i = 0; i < 18; i++) {
+    setTimeout(() => {
+      const p = document.createElement('div');
+      p.style.cssText = `
+        position:fixed;
+        width:${Math.random()*8+4}px;
+        height:${Math.random()*8+4}px;
+        border-radius:50%;
+        background:${colors[Math.floor(Math.random()*colors.length)]};
+        left:${rect.left + rect.width/2 + (Math.random()-0.5)*rect.width}px;
+        top:${rect.top + rect.height/2 + (Math.random()-0.5)*rect.height}px;
+        pointer-events:none;
+        z-index:9999;
+        animation:particleBurst 1s ease forwards;
+      `;
+      document.body.appendChild(p);
+      const angle = Math.random() * Math.PI * 2;
+      const distance = Math.random() * 120 + 40;
+      p.animate([
+        {transform:'translate(0,0) scale(1)',opacity:1},
+        {transform:`translate(${Math.cos(angle)*distance}px,${Math.sin(angle)*distance}px) scale(0)`,opacity:0}
+      ],{duration:800+Math.random()*400,easing:'ease-out',fill:'forwards'});
+      setTimeout(() => p.remove(), 1200);
+    }, i * 30);
+  }
+}
+
+// ===== CURSOR =====
+const cursor = document.getElementById('cursor');
+const cursorGlow = document.getElementById('cursorGlow');
+let mouseX=0,mouseY=0,glowX=0,glowY=0;
+document.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY;cursor.style.left=mouseX-6+'px';cursor.style.top=mouseY-6+'px';spawnParticle(mouseX,mouseY);});
+function animateGlow(){glowX+=(mouseX-glowX)*0.12;glowY+=(mouseY-glowY)*0.12;cursorGlow.style.left=glowX-20+'px';cursorGlow.style.top=glowY-20+'px';requestAnimationFrame(animateGlow);}
+animateGlow();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cursor.style.transform='scale(2)';cursorGlow.style.transform='scale(1.5)';});el.addEventListener('mouseleave',()=>{cursor.style.transform='scale(1)';cursorGlow.style.transform='scale(1)';});});
+let pt=0;
+function spawnParticle(x,y){pt++;if(pt%5!==0)return;const colors=['#F8C7D9','#F1AFC6','#E09AB7','#D47A9C','#FFE7F1'];const p=document.createElement('div');p.className='cursor-particle';p.style.left=(x+(Math.random()-0.5)*16)+'px';p.style.top=(y+(Math.random()-0.5)*16)+'px';const sz=Math.random()*5+3;p.style.width=sz+'px';p.style.height=sz+'px';p.style.background=colors[Math.floor(Math.random()*colors.length)];document.body.appendChild(p);setTimeout(()=>p.remove(),600);}
+
+// ===== SPARKLES =====
+const sparklesContainer=document.getElementById('sparkles');
+for(let i=0;i<35;i++){const s=document.createElement('div');s.className='sparkle';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*4+'s';s.style.animationDuration=(2+Math.random()*3)+'s';sparklesContainer.appendChild(s);}
+
+// ===== CHERRY BLOSSOMS =====
+const canvas=document.getElementById('cherryCanvas');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+const petals=[];
+for(let i=0;i<22;i++){petals.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height-canvas.height,size:Math.random()*10+5,speedY:Math.random()*1.2+0.4,speedX:(Math.random()-0.5)*0.8,rotation:Math.random()*360,rotSpeed:(Math.random()-0.5)*1.5,opacity:Math.random()*0.45+0.25,color:['#F8C7D9','#F1AFC6','#FFAEC9','#FFD5E8','#E8A0BE'][Math.floor(Math.random()*5)]});}
+function drawPetal(x,y,size,rotation,color,opacity){ctx.save();ctx.translate(x,y);ctx.rotate(rotation*Math.PI/180);ctx.globalAlpha=opacity;ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(0,-size);ctx.bezierCurveTo(size*0.6,-size*0.8,size*0.8,0,0,size*0.5);ctx.bezierCurveTo(-size*0.8,0,-size*0.6,-size*0.8,0,-size);ctx.fill();ctx.restore();}
+function animatePetals(){ctx.clearRect(0,0,canvas.width,canvas.height);petals.forEach(p=>{p.y+=p.speedY;p.x+=p.speedX+Math.sin(p.y*0.015)*0.4;p.rotation+=p.rotSpeed;if(p.y>canvas.height+20){p.y=-20;p.x=Math.random()*canvas.width;}drawPetal(p.x,p.y,p.size,p.rotation,p.color,p.opacity);});requestAnimationFrame(animatePetals);}
+animatePetals();
+
+// ===== NAVBAR =====
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);});
+
+// ===== REVEAL =====
+const observer=new IntersectionObserver(entries=>{entries.forEach((entry,i)=>{if(entry.isIntersecting)setTimeout(()=>entry.target.classList.add('visible'),i*150);});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
