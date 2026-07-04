@@ -199,7 +199,7 @@ nav.scrolled{background:rgba(255,255,255,0.75);}
 <div class="wrapper">
 
   <div class="reveal">
-    <div class="page-badge">✨ Daily Practice</div>
+    <div class="page-badge">Daily Practice</div>
     <h1 class="page-title">Your Daily Manifestation Card</h1>
     <p class="page-sub">Pull a card every morning and let the universe send you exactly the message you need to hear today. Each card carries a unique affirmation and intention to guide your day. 🌸</p>
   </div>
@@ -288,7 +288,7 @@ function drawCard() {
   document.getElementById('cardCategory').textContent = card.category;
   document.getElementById('cardMessage').textContent = card.message;
   document.getElementById('cardAffirmation').textContent = '"' + card.affirmation + '"';
-  document.getElementById('shareText').textContent = card.emoji + ' ' + card.message + '\n\n"' + card.affirmation + '"\n\n— LaxNara Wini 💜';
+  document.getElementById('shareText').textContent = card.emoji + ' ' + card.message + '\n\n"' + card.affirmation + '"\n\n— LaxNara Wini';
 
   setTimeout(() => {
     document.getElementById('manifestCard').classList.add('flipped');
@@ -315,7 +315,7 @@ function resetCard() {
 
 function copyCard() {
   if (!currentCard) return;
-  const text = currentCard.emoji + ' ' + currentCard.message + '\n\n"' + currentCard.affirmation + '"\n\n— LaxNara Wini 💜\nlaxnarawini.github.io';
+  const text = currentCard.emoji + ' ' + currentCard.message + '\n\n"' + currentCard.affirmation + '"\n\n— LaxNara Wini\nlaxnarawini.github.io';
   navigator.clipboard.writeText(text).then(() => {
     const msg = document.getElementById('copiedMsg');
     msg.classList.add('show');
