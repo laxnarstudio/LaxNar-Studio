@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="p:domain_verify" content="f1429319a4e819013f2d8174ead4c023"/>
 <title>LaxNara Wini | Manifest Your Dream Life</title>
 <meta name="description" content="A space for manifestation, abundance, healing, mindset and becoming your highest self."/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,6 +22,40 @@ html{scroll-behavior:smooth;}
   --glass-border:rgba(255,255,255,0.8);
 }
 
+/* CURSOR */
+.cursor{
+  position:fixed;
+  width:12px;height:12px;
+  background:var(--pink-dark);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:99999;
+  transition:transform 0.1s ease;
+  mix-blend-mode:multiply;
+}
+.cursor-glow{
+  position:fixed;
+  width:40px;height:40px;
+  border:1.5px solid rgba(212,122,156,0.4);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:99998;
+  transition:all 0.15s ease;
+}
+.cursor-particle{
+  position:fixed;
+  width:6px;height:6px;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:99997;
+  opacity:0;
+  animation:particleFade 0.6s ease forwards;
+}
+@keyframes particleFade{
+  0%{opacity:0.8;transform:scale(1);}
+  100%{opacity:0;transform:scale(0);}
+}
+
 /* BACKGROUND */
 body{
   font-family:'Poppins',sans-serif;
@@ -38,6 +71,11 @@ body{
 .blob3{width:350px;height:350px;background:#FFD9EA;bottom:-120px;left:20%;animation-duration:12s;}
 .blob4{width:300px;height:300px;background:#FFF0F6;bottom:50px;right:10%;animation-duration:16s;}
 @keyframes floatBlob{0%{transform:translateY(0) scale(1);}100%{transform:translateY(-40px) scale(1.08);}}
+
+/* SPARKLES */
+.sparkles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.sparkle{position:absolute;width:3px;height:3px;background:rgba(241,175,198,0.7);border-radius:50%;animation:twinkle 3s ease-in-out infinite;}
+@keyframes twinkle{0%,100%{opacity:0.1;transform:scale(0.5);}50%{opacity:1;transform:scale(1.5);}}
 
 /* NAVIGATION */
 nav{
@@ -133,6 +171,23 @@ nav.scrolled{
 }
 .hero-socials a:hover{background:#F8C7D9;color:white;transform:translateY(-4px);}
 
+/* SVG CHERRY BLOSSOMS */
+.cherry-canvas{position:absolute;inset:0;pointer-events:none;z-index:1;}
+
+/* SVG BUTTERFLIES */
+.butterfly-svg{
+  position:absolute;pointer-events:none;opacity:0.55;
+  animation:flySvg 30s linear infinite;
+}
+.butterfly-svg:nth-child(2){animation-delay:-12s;top:60%;}
+@keyframes flySvg{
+  0%{transform:translateX(-100px) translateY(0) scaleX(1);}
+  25%{transform:translateX(25vw) translateY(-40px) scaleX(-1);}
+  50%{transform:translateX(50vw) translateY(20px) scaleX(1);}
+  75%{transform:translateX(75vw) translateY(-30px) scaleX(-1);}
+  100%{transform:translateX(110vw) translateY(10px) scaleX(1);}
+}
+
 /* MOON */
 .moon{
   position:absolute;top:80px;right:80px;width:85px;height:85px;
@@ -160,7 +215,7 @@ nav.scrolled{
   font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
   color:var(--pink-dark);margin-bottom:22px;
 }
-.section-heading h3{ 
+.section-heading h3{
   font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:600;
   line-height:1.15;color:#C87496;margin-bottom:16px;
 }
@@ -293,6 +348,10 @@ footer{padding:90px 20px 60px;text-align:center;}
 </head>
 <body>
 
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
 <!-- Background -->
 <div class="background">
   <div class="blob blob1"></div>
@@ -300,6 +359,9 @@ footer{padding:90px 20px 60px;text-align:center;}
   <div class="blob blob3"></div>
   <div class="blob blob4"></div>
 </div>
+
+<!-- Sparkles -->
+<div class="sparkles" id="sparkles"></div>
 
 <!-- Navigation -->
 <nav id="navbar">
@@ -345,8 +407,27 @@ footer{padding:90px 20px 60px;text-align:center;}
     <ellipse cx="120" cy="28" rx="40" ry="28" fill="rgba(255,255,255,0.65)"/>
   </svg>
 
+  <!-- SVG Butterflies -->
+  <svg class="butterfly-svg" style="top:30%;left:-80px;" width="60" height="50" viewBox="0 0 60 50">
+    <path d="M30,25 Q10,5 2,15 Q-2,28 15,30 Q22,31 30,25Z" fill="rgba(212,122,156,0.5)"/>
+    <path d="M30,25 Q50,5 58,15 Q62,28 45,30 Q38,31 30,25Z" fill="rgba(212,122,156,0.5)"/>
+    <path d="M30,25 Q12,35 8,42 Q14,48 22,38 Q26,33 30,25Z" fill="rgba(241,175,198,0.5)"/>
+    <path d="M30,25 Q48,35 52,42 Q46,48 38,38 Q34,33 30,25Z" fill="rgba(241,175,198,0.5)"/>
+    <line x1="30" y1="20" x2="30" y2="30" stroke="#C87898" stroke-width="1.5"/>
+  </svg>
+  <svg class="butterfly-svg" style="top:60%;left:-80px;animation-delay:-12s;" width="50" height="42" viewBox="0 0 60 50">
+    <path d="M30,25 Q10,5 2,15 Q-2,28 15,30 Q22,31 30,25Z" fill="rgba(248,199,218,0.6)"/>
+    <path d="M30,25 Q50,5 58,15 Q62,28 45,30 Q38,31 30,25Z" fill="rgba(248,199,218,0.6)"/>
+    <path d="M30,25 Q12,35 8,42 Q14,48 22,38 Q26,33 30,25Z" fill="rgba(212,122,156,0.45)"/>
+    <path d="M30,25 Q48,35 52,42 Q46,48 38,38 Q34,33 30,25Z" fill="rgba(212,122,156,0.45)"/>
+    <line x1="30" y1="20" x2="30" y2="30" stroke="#C87898" stroke-width="1.5"/>
+  </svg>
+
+  <!-- Cherry Blossom Canvas -->
+  <canvas class="cherry-canvas" id="cherryCanvas"></canvas>
+
   <div class="hero-content">
-    <div class="hero-badge">Manifest · Heal · Become</div>
+    <div class="hero-badge">✨ Manifest · Heal · Become</div>
     <h1>LaxNara Wini</h1>
     <h2>Manifest Your Dream Life</h2>
     <p>A dreamy corner of the internet where manifestation, abundance, healing, self-growth and soft living come together. Slow down. Believe bigger. Become the version of you you've always imagined.</p>
@@ -373,9 +454,6 @@ footer{padding:90px 20px 60px;text-align:center;}
     <p>Thoughts, guides and inspiration to help you attract the life you deserve.</p>
   </div>
   <div class="cards">
-    <div class="card reveal"><div class="card-icon">✨</div><h4>The 369 Manifestation Method</h4><p>A simple and powerful journaling practice that people all over the world are using to manifest their desires faster and with more intention.</p><a href="369manifestationmethod.html">Read Article →</a></div>
-    <div class="card reveal"><div class="card-icon">✨</div><h4>The Meaning of Angel Numbers 111 222 333 444 555 666 777 888 999 000</h4><p>A gentle guide to understanding what the universe might be trying to tell you every time you see these powerful number sequences.</p><a href="angelnumbersmeaning.html">Read Article →</a></div>
-    <div class="card reveal"><div class="card-icon">🌙</div><h4>How to Let Go and Trust the Universe</h4><p>A gentle guide for the overthinkers and control lovers who know they need to surrender but have no idea how to actually do it.</p><a href="letgotrustuniverse.html">Read Article →</a></div>
     <div class="card reveal"><div class="card-icon">✨</div><h4>The Truth About Lucky Girl Syndrome</h4><p>A deeper look into the mindset behind Lucky Girl Syndrome and how true alignment can completely transform your reality.</p><a href="luckygirlsyndrome.html">Read Article →</a></div>
     <div class="card reveal"><div class="card-icon">💸</div><h4>How to Manifest Money as a Beginner</h4><p>Learn how to shift your money mindset and begin attracting abundance with simple daily manifestation practices.</p><a href="manifestmoneybeginner.html">Read Article →</a></div>
     <div class="card reveal"><div class="card-icon">🌸</div><h4>How to Raise Your Vibration</h4><p>Gentle habits that naturally raise your energy and help you become magnetic to everything you desire.</p><a href="raiseyourvibration.html">Read Article →</a></div>
@@ -416,7 +494,6 @@ footer{padding:90px 20px 60px;text-align:center;}
     <p>A peaceful collection of articles to help you heal, grow, love yourself more deeply and reconnect with your inner peace.</p>
   </div>
   <div class="cards">
-    <div class="card reveal"><div class="card-icon">🤍</div><h4>How to Set Boundaries Without Feeling Guilty</h4><p>A gentle and honest guide for the people pleasers and soft hearted souls who give so much of themselves that they forget to protect their own peace.</p><a href="setboundarieswithoutguilt.html">Read Article →</a></div>
     <div class="card reveal"><div class="card-icon">🤍</div><h4>How To Heal Your Inner Child</h4><p>Reconnect with the younger version of yourself through gentle practices, compassion and emotional healing.</p><a href="healyourinnerchild.html">Read Article →</a></div>
     <div class="card reveal"><div class="card-icon">🌷</div><h4>How To Practice Self Love Every Day</h4><p>Small daily rituals that help you build confidence, self-worth and a kinder relationship with yourself.</p><a href="selfloveeveryday.html">Read Article →</a></div>
     <div class="card reveal"><div class="card-icon">☁️</div><h4>How To Stop Overthinking And Find Peace</h4><p>Quiet your mind, release anxious thoughts and create more calm in your everyday life.</p><a href="stopoverthinkingfindpeace.html">Read Article →</a></div>
@@ -463,6 +540,119 @@ footer{padding:90px 20px 60px;text-align:center;}
 </footer>
 
 <script>
+// ===== CURSOR =====
+const cursor = document.getElementById('cursor');
+const cursorGlow = document.getElementById('cursorGlow');
+let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+const particles = [];
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursor.style.left = mouseX - 6 + 'px';
+  cursor.style.top = mouseY - 6 + 'px';
+  spawnParticle(mouseX, mouseY);
+});
+
+function animateGlow() {
+  glowX += (mouseX - glowX) * 0.12;
+  glowY += (mouseY - glowY) * 0.12;
+  cursorGlow.style.left = glowX - 20 + 'px';
+  cursorGlow.style.top = glowY - 20 + 'px';
+  requestAnimationFrame(animateGlow);
+}
+animateGlow();
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'scale(2)';
+    cursorGlow.style.transform = 'scale(1.5)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'scale(1)';
+    cursorGlow.style.transform = 'scale(1)';
+  });
+});
+
+let particleThrottle = 0;
+function spawnParticle(x, y) {
+  particleThrottle++;
+  if (particleThrottle % 4 !== 0) return;
+  const colors = ['#F8C7D9','#F1AFC6','#E09AB7','#D47A9C','#FFE7F1'];
+  const p = document.createElement('div');
+  p.className = 'cursor-particle';
+  p.style.left = (x + (Math.random()-0.5)*16) + 'px';
+  p.style.top = (y + (Math.random()-0.5)*16) + 'px';
+  p.style.width = (Math.random()*5+3) + 'px';
+  p.style.height = p.style.width;
+  p.style.background = colors[Math.floor(Math.random()*colors.length)];
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), 600);
+}
+
+// ===== SPARKLES =====
+const sparklesContainer = document.getElementById('sparkles');
+for (let i = 0; i < 35; i++) {
+  const s = document.createElement('div');
+  s.className = 'sparkle';
+  s.style.left = Math.random()*100 + '%';
+  s.style.top = Math.random()*100 + '%';
+  s.style.animationDelay = Math.random()*4 + 's';
+  s.style.animationDuration = (2+Math.random()*3) + 's';
+  sparklesContainer.appendChild(s);
+}
+
+// ===== CHERRY BLOSSOMS =====
+const canvas = document.getElementById('cherryCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+const petals = [];
+for (let i = 0; i < 28; i++) {
+  petals.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height - canvas.height,
+    size: Math.random() * 10 + 6,
+    speedY: Math.random() * 1.2 + 0.4,
+    speedX: (Math.random() - 0.5) * 0.8,
+    rotation: Math.random() * 360,
+    rotSpeed: (Math.random() - 0.5) * 1.5,
+    opacity: Math.random() * 0.5 + 0.3,
+    color: ['#F8C7D9','#F1AFC6','#FFAEC9','#FFD5E8','#E8A0BE'][Math.floor(Math.random()*5)]
+  });
+}
+
+function drawPetal(x, y, size, rotation, color, opacity) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(rotation * Math.PI / 180);
+  ctx.globalAlpha = opacity;
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(0, -size);
+  ctx.bezierCurveTo(size*0.6, -size*0.8, size*0.8, 0, 0, size*0.5);
+  ctx.bezierCurveTo(-size*0.8, 0, -size*0.6, -size*0.8, 0, -size);
+  ctx.fill();
+  ctx.restore();
+}
+
+function animatePetals() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  petals.forEach(p => {
+    p.y += p.speedY;
+    p.x += p.speedX + Math.sin(p.y * 0.015) * 0.4;
+    p.rotation += p.rotSpeed;
+    if (p.y > canvas.height + 20) { p.y = -20; p.x = Math.random() * canvas.width; }
+    drawPetal(p.x, p.y, p.size, p.rotation, p.color, p.opacity);
+  });
+  requestAnimationFrame(animatePetals);
+}
+animatePetals();
 
 // ===== NAVBAR SCROLL =====
 window.addEventListener('scroll', () => {
