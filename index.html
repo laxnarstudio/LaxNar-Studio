@@ -39,11 +39,6 @@ body{
 .blob4{width:300px;height:300px;background:#FFF0F6;bottom:50px;right:10%;animation-duration:16s;}
 @keyframes floatBlob{0%{transform:translateY(0) scale(1);}100%{transform:translateY(-40px) scale(1.08);}}
 
-/* SPARKLES */
-.sparkles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
-.sparkle{position:absolute;width:3px;height:3px;background:rgba(241,175,198,0.7);border-radius:50%;animation:twinkle 3s ease-in-out infinite;}
-@keyframes twinkle{0%,100%{opacity:0.1;transform:scale(0.5);}50%{opacity:1;transform:scale(1.5);}}
-
 /* NAVIGATION */
 nav{
   position:fixed;top:20px;left:50%;transform:translateX(-50%);
@@ -468,119 +463,6 @@ footer{padding:90px 20px 60px;text-align:center;}
 </footer>
 
 <script>
-// ===== CURSOR =====
-const cursor = document.getElementById('cursor');
-const cursorGlow = document.getElementById('cursorGlow');
-let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
-const particles = [];
-
-document.addEventListener('mousemove', e => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  cursor.style.left = mouseX - 6 + 'px';
-  cursor.style.top = mouseY - 6 + 'px';
-  spawnParticle(mouseX, mouseY);
-});
-
-function animateGlow() {
-  glowX += (mouseX - glowX) * 0.12;
-  glowY += (mouseY - glowY) * 0.12;
-  cursorGlow.style.left = glowX - 20 + 'px';
-  cursorGlow.style.top = glowY - 20 + 'px';
-  requestAnimationFrame(animateGlow);
-}
-animateGlow();
-
-document.querySelectorAll('a, button').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    cursor.style.transform = 'scale(2)';
-    cursorGlow.style.transform = 'scale(1.5)';
-  });
-  el.addEventListener('mouseleave', () => {
-    cursor.style.transform = 'scale(1)';
-    cursorGlow.style.transform = 'scale(1)';
-  });
-});
-
-let particleThrottle = 0;
-function spawnParticle(x, y) {
-  particleThrottle++;
-  if (particleThrottle % 4 !== 0) return;
-  const colors = ['#F8C7D9','#F1AFC6','#E09AB7','#D47A9C','#FFE7F1'];
-  const p = document.createElement('div');
-  p.className = 'cursor-particle';
-  p.style.left = (x + (Math.random()-0.5)*16) + 'px';
-  p.style.top = (y + (Math.random()-0.5)*16) + 'px';
-  p.style.width = (Math.random()*5+3) + 'px';
-  p.style.height = p.style.width;
-  p.style.background = colors[Math.floor(Math.random()*colors.length)];
-  document.body.appendChild(p);
-  setTimeout(() => p.remove(), 600);
-}
-
-// ===== SPARKLES =====
-const sparklesContainer = document.getElementById('sparkles');
-for (let i = 0; i < 35; i++) {
-  const s = document.createElement('div');
-  s.className = 'sparkle';
-  s.style.left = Math.random()*100 + '%';
-  s.style.top = Math.random()*100 + '%';
-  s.style.animationDelay = Math.random()*4 + 's';
-  s.style.animationDuration = (2+Math.random()*3) + 's';
-  sparklesContainer.appendChild(s);
-}
-
-// ===== CHERRY BLOSSOMS =====
-const canvas = document.getElementById('cherryCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
-const petals = [];
-for (let i = 0; i < 28; i++) {
-  petals.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height - canvas.height,
-    size: Math.random() * 10 + 6,
-    speedY: Math.random() * 1.2 + 0.4,
-    speedX: (Math.random() - 0.5) * 0.8,
-    rotation: Math.random() * 360,
-    rotSpeed: (Math.random() - 0.5) * 1.5,
-    opacity: Math.random() * 0.5 + 0.3,
-    color: ['#F8C7D9','#F1AFC6','#FFAEC9','#FFD5E8','#E8A0BE'][Math.floor(Math.random()*5)]
-  });
-}
-
-function drawPetal(x, y, size, rotation, color, opacity) {
-  ctx.save();
-  ctx.translate(x, y);
-  ctx.rotate(rotation * Math.PI / 180);
-  ctx.globalAlpha = opacity;
-  ctx.fillStyle = color;
-  ctx.beginPath();
-  ctx.moveTo(0, -size);
-  ctx.bezierCurveTo(size*0.6, -size*0.8, size*0.8, 0, 0, size*0.5);
-  ctx.bezierCurveTo(-size*0.8, 0, -size*0.6, -size*0.8, 0, -size);
-  ctx.fill();
-  ctx.restore();
-}
-
-function animatePetals() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  petals.forEach(p => {
-    p.y += p.speedY;
-    p.x += p.speedX + Math.sin(p.y * 0.015) * 0.4;
-    p.rotation += p.rotSpeed;
-    if (p.y > canvas.height + 20) { p.y = -20; p.x = Math.random() * canvas.width; }
-    drawPetal(p.x, p.y, p.size, p.rotation, p.color, p.opacity);
-  });
-  requestAnimationFrame(animatePetals);
-}
-animatePetals();
 
 // ===== NAVBAR SCROLL =====
 window.addEventListener('scroll', () => {
